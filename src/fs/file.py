@@ -34,4 +34,22 @@ class File:
     def removeFile(self):  
         if self.exists() and self.isRegularFile():
             os.remove(self.path_.getAbsolutePath())
+
+    def writeContent(self, content):
+        try:
+            f = open(self.path_.getAbsolutePath(), 'w')
+            f.write(content)
+            f.close()
+        except Exception as e:
+            print "Error : unable to write content in file : ", self.path_
+
+    def readContent(self):
+        content = None
+        try:
+            f = open(self.path_.getAbsolutePath(), 'r')
+            content = f.read()
+            f.close()
+        except Exception as e:
+            print "Error : unable to write content in file : ", self.path_
+        return content
         
