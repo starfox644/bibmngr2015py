@@ -22,7 +22,7 @@ class DocumentFolder:
             self.path_ = path
         else:
             self.path_ = Path(path)
-        self.fields = None
+        self.fields_ = None
 
     def getDir(self):
         return Directory(self.path_)

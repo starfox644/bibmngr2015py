@@ -16,8 +16,8 @@ class LatexNotes:
                 "\n"
                 "\\begin{document}\n\n")
 
-    FIELDS_IN_TABLE = ["year", "authors", "keywords", "journal"]
-    TRANSLATION = {'year':'Année', 'authors':"Auteurs", "keywords":"Mots-clés"}
+    FIELDS_IN_TABLE = ["year", "author", "keywords", "journal"]
+    TRANSLATION = {'year':'Annee', 'author':"Auteurs", "keywords":"Mots-cles"}
 
     FILENAME = "notes.tex"
 
@@ -45,6 +45,8 @@ class LatexNotes:
                 name = self.TRANSLATION[fieldName]
             else:
                 name = fieldName.title()
+            print "Field name : ", name
+            print "Field value : ", fieldValue
             content += name + " : & \\textbf{" + fieldValue + "}\n"
             content += "\\\\\\addlinespace\n\n"
         return content

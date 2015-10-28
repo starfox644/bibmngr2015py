@@ -38,11 +38,11 @@ class TestBibtexReader(Test):
    
     def parse(self):
         parser = BibtexReader("article.bib")
-        d = parser.read()
-        assert (d != None)
-        assert (d.getDocType() == DocumentFields.ARTICLE)
-        assert (d.getField("title") == "Understanding and Improving the Realism of Image Composites")
-        assert (d.getField("journal") == "ACM Trans. Graph.")
+        fields = parser.read()
+        assert (fields != None)
+        assert (fields.getDocType() == DocumentFields.ARTICLE)
+        assert (fields.getField("title") == "Understanding and Improving the Realism of Image Composites")
+        assert (fields.getField("journal") == "ACM Trans. Graph.")
         
 t = TestBibtexReader()
 t.runTests()
