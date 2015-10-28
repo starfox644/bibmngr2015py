@@ -4,7 +4,10 @@ from path import Path
 class File:
     
     def __init__(self, path=""):
-        self.path_ = Path(path)
+        if (path.__class__ == Path):
+            self.path_ = path
+        else:
+            self.path_ = Path(path)
         
     def getPath(self):
         return self.path_

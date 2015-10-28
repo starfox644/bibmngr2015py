@@ -10,6 +10,7 @@ class TestFile(Test):
         self.addTestFunction(self.notExist)
         self.addTestFunction(self.create)
         self.addTestFunction(self.remove)
+        self.addTestFunction(self.readWrite)
      
     def notExist(self): 
         f = File("hello")
@@ -26,6 +27,24 @@ class TestFile(Test):
         f = File("hello")
         f.removeFile()
         assert(not f.exists())
+
+    def readWrite(self):
+        f = File("test_read_write.txt")
+        content = "Hello\nI am a file"
+        f.writeContent(content)
+        readContent = f.readContent()
+        assert(content == readContent)
+        f.removeFile()
+
+        f = File("test_read_write2.txt")
+        content = "Hello\nI am a file"
+        f.writeContent(content)
+
+        content = "This is another content for the file"
+        f.writeContent(content)
+        readContent = f.readContent()
+        assert(content == readContent)
+        f.removeFile()
     
 t = TestFile()
 t.runTests()

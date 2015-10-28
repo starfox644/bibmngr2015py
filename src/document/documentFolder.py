@@ -1,6 +1,8 @@
 from documentFields import DocumentFields
+from latexNotes import LatexNotes
 from fs.path import Path
 from fs.directory import Directory
+
 
 class DocumentFolder:
     
@@ -8,13 +10,15 @@ class DocumentFolder:
     IMAGES_DIR_NAME = "images"
     NOTES_DIR_NAME = "notes"
     DESCRIPTION_DIR_NAME = "description"
+
+    INTERN_FOLDERS = [VIDEOS_DIR_NAME, IMAGES_DIR_NAME, NOTES_DIR_NAME, DESCRIPTION_DIR_NAME]
     
     BIBLIODATA_FILE_NAME = "biblio_data"
     
     wordsRemoved = ["a", "an", "and", "of", "on", "the"]
     
     def __init__(self, path=""):
-        if (type(path) == Path):
+        if (path.__class__ == Path):
             self.path_ = path
         else:
             self.path_ = Path(path)
@@ -24,7 +28,7 @@ class DocumentFolder:
         return Directory(self.path_)
         
     def setPath(self, path):
-        if (type(path) == Path):
+        if (path.__class__ == Path):
             self.path_ = path
         else:
             self.path_ = Path(path)
@@ -58,7 +62,7 @@ class DocumentFolder:
             return
         
         name = self.computeFolderName()
-        self.path_ = path + "/" + name
+        self.path_ = Path(path + "/" + name)
         folder = Directory(self.path_)
         folder.createDir()
 
@@ -70,11 +74,30 @@ class DocumentFolder:
             print "Unable to create internal folder ", name, " in : ", self.path_
             return
 
-        dir = Directory(self.path_ + "/" + name)
+        dir = Directory(self.path_.getAbsolutePath() + "/" + name)
         dir.createDir()
 
     def delete(self):
         Directory(self.path_).removeDir()
+
+    def organize(self):
+        d = Directory(self.path_)
+        if (not d.exists()):
+            print "Error : attempt to organize a non existing folder : ", self.path_
+            return
+
+        for internFolderName in self.INTERN_FOLDERS:
+            if (not d.containsFolder(internFolderName)):
+                self.createInternFolder(internFolderName)
+
+        notesPath = self.path_.getAbsolutePath() + "/" + self.NOTES_DIR_NAME
+        notes = LatexNotes(self.fields_)
+        notes.createAllContent()
+        notes.writeContent(notesPath)
+
+    def getNotesFilePath(self):
+        path = self.path_.getAbsolutePath() + "/" + self.NOTES_DIR_NAME + "/" + LatexNotes.FILENAME
+        return path
 
     def createVideoFolder(self):
         self.createInternFolder(self.VIDEOS_DIR_NAME)

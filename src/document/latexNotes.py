@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+from fs.file import File
 from documentFields import DocumentFields
 
 class LatexNotes:
@@ -18,12 +19,18 @@ class LatexNotes:
     FIELDS_IN_TABLE = ["year", "authors", "keywords", "journal"]
     TRANSLATION = {'year':'Année', 'authors':"Auteurs", "keywords":"Mots-clés"}
 
+    FILENAME = "notes.tex"
+
     def __init__(self, fields):
         self.fields_ = fields
         self.content = self.HEADER
 
     def getDocumentContent(self):
         return (self.content + "\end{document}\n")
+
+    def writeContent(self, folderPath):
+        f = File(folderPath + "/" + self.FILENAME)
+        f.writeContent(self.getDocumentContent())
 
     def createTitle(self):
         if (self.fields_.hasTitle()):
@@ -52,4 +59,8 @@ class LatexNotes:
         descTable += "\\bottomrule\n"
         descTable += "\\end{longtable}\n\n"
         self.content += descTable
+
+    def createAllContent(self):
+        self.createTitle()
+        self.createDescriptionTable()
 
