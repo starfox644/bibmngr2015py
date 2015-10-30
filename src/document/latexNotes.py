@@ -2,10 +2,9 @@
 
 from fs.file import File
 from documentFields import DocumentFields
+from notes import Notes
 
-class LatexNotes:
-
-    # TODO : translation table for fields names
+class LatexNotes(Notes):
 
     HEADER = (  "\\documentclass[10pt]{article}\n"
                 "\\usepackage[utf8]{inputenc}\n"
@@ -16,53 +15,41 @@ class LatexNotes:
                 "\n"
                 "\\begin{document}\n\n")
 
-    FIELDS_IN_TABLE = ["year", "author", "keywords", "journal"]
-    TRANSLATION = {'year':'Annee', 'author':"Auteurs", "keywords":"Mots-cles"}
+    TABLE_HEADER = ("\\begin{longtable}[c]{@{}ll@{}}\n"
+                    "\\toprule\\addlinespace\n"
+                    "\n")
+
+    TABLE_END = ( "\\bottomrule\n"
+            "\\end{longtable}\n\n")
 
     FILENAME = "notes.tex"
 
     def __init__(self, fields):
-        self.fields_ = fields
-        self.content = self.HEADER
+        Notes.__init__(self, fields)
 
     def getDocumentContent(self):
-        return (self.content + "\end{document}\n")
+        content = Notes.getDocumentContent(self)
+        return (content + "\end{document}\n")
 
-    def writeContent(self, folderPath):
-        f = File(folderPath + "/" + self.FILENAME)
-        f.writeContent(self.getDocumentContent())
+    def getFormattedTitle(self, title):
+        formTitle = "\\title{" + title + "}\n"
+        formTitle += "\\maketitle\n\n"
+        return formTitle
 
-    def createTitle(self):
-        if (self.fields_.hasTitle()):
-            self.content += "\\title{" + self.fields_.getField("title") + "}\n"
-            self.content += "\\maketitle\n\n"
+    def getFileName(self):
+        return self.FILENAME
 
-    def addFieldInTable(self, tableContent, fieldName):
-        content = tableContent
-        if (self.fields_.hasField(fieldName)):
-            fieldValue = self.fields_.getField(fieldName)
-            if (fieldName in self.TRANSLATION):
-                name = self.TRANSLATION[fieldName]
-            else:
-                name = fieldName.title()
-            print "Field name : ", name
-            print "Field value : ", fieldValue
-            content += name + " : & \\textbf{" + fieldValue + "}\n"
-            content += "\\\\\\addlinespace\n\n"
-        return content
+    def getHeader(self):
+        return self.HEADER
 
-    def createDescriptionTable(self):
-        descTable = "\\begin{longtable}[c]{@{}ll@{}}\n"
-        descTable += "\\toprule\\addlinespace\n\n"
+    def getDescTableHeader(self):
+        return self.TABLE_HEADER
 
-        for fieldName in self.FIELDS_IN_TABLE:
-            descTable = self.addFieldInTable(descTable, fieldName)
+    def getDescTableEnd(self):
+        return self.TABLE_END
 
-        descTable += "\\bottomrule\n"
-        descTable += "\\end{longtable}\n\n"
-        self.content += descTable
-
-    def createAllContent(self):
-        self.createTitle()
-        self.createDescriptionTable()
+    def getFieldTableEntry(self, name, value):
+        entry = name + " : & \\textbf{" + value + "}\n"
+        entry += "\\\\\\addlinespace\n\n"
+        return entry
 

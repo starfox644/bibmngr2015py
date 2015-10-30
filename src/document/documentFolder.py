@@ -1,5 +1,7 @@
 from documentFields import DocumentFields
 from latexNotes import LatexNotes
+from wikiNotes import WikiNotes
+from notes import Notes
 from fs.path import Path
 from fs.directory import Directory
 
@@ -91,9 +93,14 @@ class DocumentFolder:
                 self.createInternFolder(internFolderName)
 
         notesPath = self.path_.getAbsolutePath() + "/" + self.NOTES_DIR_NAME
-        notes = LatexNotes(self.fields_)
-        notes.createAllContent()
-        notes.writeContent(notesPath)
+        latexNotes = LatexNotes(self.fields_)
+        latexNotes.createAllContent()
+        latexNotes.writeContent(notesPath)
+
+        wikiNotes = WikiNotes(self.fields_)
+        wikiNotes.createAllContent()
+        wikiNotes.writeContent(notesPath)
+        # notes = Notes(self.fields_)
 
     def getNotesFilePath(self):
         path = self.path_.getAbsolutePath() + "/" + self.NOTES_DIR_NAME + "/" + LatexNotes.FILENAME

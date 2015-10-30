@@ -1,0 +1,9 @@
+Understanding and Improving the Realism of Image Composites
+
+----- Description -----
+
+Annee = 2012
+Auteurs = Xue, Su and Agarwala, Aseem and Dorsey, Julie and Rushmeier, Holly
+Journal = ACM Trans. Graph.
+-----------------------
+
