@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from documentFields import DocumentFields
 from latexNotes import LatexNotes
 from wikiNotes import WikiNotes

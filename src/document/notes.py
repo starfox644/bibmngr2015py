@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 from fs.file import File
 
 class Notes:
@@ -13,9 +15,13 @@ class Notes:
         self.content_ = self.getHeader()
 
     def getDocumentContent(self):
-        return self.content_
+        content = self.content_ + self.getContentEnd()
+        return content
 
     def getHeader(self):
+        return ""
+
+    def getContentEnd(self):
         return ""
 
     def getFileName(self):

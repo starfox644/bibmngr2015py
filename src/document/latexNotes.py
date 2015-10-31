@@ -15,6 +15,8 @@ class LatexNotes(Notes):
                 "\n"
                 "\\begin{document}\n\n")
 
+    END = "\end{document}\n"
+
     TABLE_HEADER = ("\\begin{longtable}[c]{@{}ll@{}}\n"
                     "\\toprule\\addlinespace\n"
                     "\n")
@@ -27,10 +29,6 @@ class LatexNotes(Notes):
     def __init__(self, fields):
         Notes.__init__(self, fields)
 
-    def getDocumentContent(self):
-        content = Notes.getDocumentContent(self)
-        return (content + "\end{document}\n")
-
     def getFormattedTitle(self, title):
         formTitle = "\\title{" + title + "}\n"
         formTitle += "\\maketitle\n\n"
@@ -41,6 +39,9 @@ class LatexNotes(Notes):
 
     def getHeader(self):
         return self.HEADER
+
+    def getContentEnd(self):
+        return self.END
 
     def getDescTableHeader(self):
         return self.TABLE_HEADER

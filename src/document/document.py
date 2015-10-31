@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 
 from documentFields import DocumentFields
 from documentFolder import DocumentFolder
@@ -11,10 +12,13 @@ class Document:
         self.folderPath_ = None
 
     def readFields(self, bibtexPath):
+        success = False
         parser = BibtexReader("article.bib")
         fields = parser.read()
         if (fields != None):
             self.fields_ = fields
+            success = True
+        return success
 
     def createDocumentFolder(self, folderPath="."):
         self.folderPath_ = folderPath
@@ -26,3 +30,4 @@ class Document:
         folder.setDocFields(self.fields_)
         folder.create(folderPath)
         folder.organize()
+

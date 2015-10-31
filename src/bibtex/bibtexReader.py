@@ -1,5 +1,6 @@
 import sys
 import bibtexparser
+# -*- coding: utf-8 -*-
 
 sys.path.append("../..")
 
