@@ -3,7 +3,7 @@
 # Author: Francois Boulogne
 # License:
 
-from __future__ import unicode_literals
+
 
 import unittest
 import sys
@@ -26,7 +26,7 @@ class TestBibtexWriterList(unittest.TestCase):
             expected = bibfile.read()
         result = to_bibtex(bib)
         if not sys.version_info >= (3, 0):
-            if isinstance(result, unicode):
+            if isinstance(result, str):
                 result = result.encode('utf-8')
         self.maxDiff = None
         self.assertEqual(expected, result)

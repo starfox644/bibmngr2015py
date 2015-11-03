@@ -3,9 +3,9 @@
 import os
 import shutil
 
-from path import Path
-from file import File
-from fileTree import FileTree
+from .path import Path
+from .file import File
+from .fileTree import FileTree
 
 # TODO : exceptions instead of print in case of error
 
@@ -20,7 +20,7 @@ class Directory(File):
             try:
                 os.mkdir(self.path_.getAbsolutePath())
             except Exception as e:
-                print "Error while creating directory ", self.path_, " : ", e
+                print("Error while creating directory ", self.path_, " : ", e)
                 
     # creates all the the directories associated to the path            
     def createTree(self):
@@ -28,7 +28,7 @@ class Directory(File):
             try:
                 os.makedirs(self.path_.getAbsolutePath())
             except Exception as e:
-                print "Error while creating directory ", self.path_, " : ", e  
+                print("Error while creating directory ", self.path_, " : ", e)  
             
     # Removes the directory associated to the path.
     # If the path corresponds to a regular file it is not removed.
@@ -41,7 +41,7 @@ class Directory(File):
             try:
                 shutil.rmtree(self.path_.getAbsolutePath())
             except Exception as e:
-                print "Error while removing directory ", self.path_, " : ", e
+                print("Error while removing directory ", self.path_, " : ", e)
     
     # def _addToFiles(self, file):
     #     if (file != self.path_.getAbsolutePath()):

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from documentFields import DocumentFields
-from documentFolder import DocumentFolder
+from .documentFields import DocumentFields
+from .documentFolder import DocumentFolder
 from bibtex.bibtexReader import BibtexReader
 
 # TODO : handle errors when reading bibtex file
@@ -13,7 +13,7 @@ class Document:
 
     def readFields(self, bibtexPath):
         success = False
-        parser = BibtexReader("article.bib")
+        parser = BibtexReader(bibtexPath)
         fields = parser.read()
         if (fields != None):
             self.fields_ = fields
@@ -23,7 +23,7 @@ class Document:
     def createDocumentFolder(self, folderPath="."):
         self.folderPath_ = folderPath
         if (self.fields_ == None):
-            print "Error : attempt to create a document folder without fields at : ", folderPath
+            print("Error : attempt to create a document folder without fields at : ", folderPath)
             return
 
         folder = DocumentFolder()

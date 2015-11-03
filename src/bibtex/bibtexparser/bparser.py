@@ -22,8 +22,8 @@ if sys.version_info >= (3, 0):
     from io import StringIO
     ustr = str
 else:
-    from StringIO import StringIO
-    ustr = unicode
+    from io import StringIO
+    ustr = str
 
 
 class BibTexParser(object):

@@ -2,8 +2,8 @@
 
 import os
 
-from path import Path
-from file import File
+from .path import Path
+from .file import File
 # from directory import *
 
 class FileTree:

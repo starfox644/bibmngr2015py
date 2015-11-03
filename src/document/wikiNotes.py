@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from fs.file import File
-from documentFields import DocumentFields
-from notes import Notes
+from .documentFields import DocumentFields
+from .notes import Notes
 
 class WikiNotes(Notes):
 

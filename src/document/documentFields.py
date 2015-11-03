@@ -37,13 +37,13 @@ class DocumentFields:
     
     def setDocType(self, docType):
         if (docType != self.OTHER and not docType in self.TYPES):
-            print "Warning : incorrect type for document"
+            print("Warning : incorrect type for document")
             self.type_ = self.OTHER
         else:    
             self.type_ = docType
         
     def __str__(self):
         s = ""
-        for field, value in self.fields_.iteritems():
+        for field, value in self.fields_.items():
             s += field + " : " + value + "\n"
         return s

@@ -118,7 +118,7 @@ class TestDocumentFolder(Test):
         assert(d.hasDescFolder())
 
         notesPath = d.getNotesFilePath()
-        print notesPath
+        print(notesPath)
         assert(File(notesPath).exists())
 
         d.delete()

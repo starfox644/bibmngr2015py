@@ -14,6 +14,6 @@ class Test:
     def runTests(self):
         for function in self.tests:
             function()
-        print "Tests for ", self.moduleName, " are ok"
+        print("Tests for ", self.moduleName, " are ok")
 
 

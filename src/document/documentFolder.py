@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-from documentFields import DocumentFields
-from latexNotes import LatexNotes
-from wikiNotes import WikiNotes
-from notes import Notes
+from .documentFields import DocumentFields
+from .latexNotes import LatexNotes
+from .wikiNotes import WikiNotes
+from .notes import Notes
 from fs.path import Path
 from fs.directory import Directory
 
@@ -42,11 +42,12 @@ class DocumentFolder:
 
     # The name is computed from the title of the document, obtained in the fields.
     def computeFolderName(self):
-        def isAlphaNum(l) : return (l.isalnum() or l.isspace())
+        # def isAlphaNum(l) : return (l.isalnum() or l.isspace())
         name = ""
         if (self.fields_ != None and self.fields_.hasTitle()):
             title = self.fields_.getField("title")
-            title = filter(isAlphaNum, title)
+            # title = str(filter(isAlphaNum, title))
+            title = ''.join(ch for ch in title if ch.isalnum() or ch.isspace())
             words = title.split()
             for i, w in enumerate(words):
                 if (w not in self.wordsRemoved): 
@@ -59,10 +60,10 @@ class DocumentFolder:
     # See the method computeFolderName for more details.
     def create(self, path="."):
         if (self.fields_ == None):
-            print "Error : attempt to create a document folder without fields"
+            print("Error : attempt to create a document folder without fields")
             return
         elif (not self.fields_.hasTitle()):
-            print "Error : attempt to create a document folder without title"
+            print("Error : attempt to create a document folder without title")
             return
         
         name = self.computeFolderName()
@@ -75,7 +76,7 @@ class DocumentFolder:
 
         # TODO : exception
         if (not docDir.exists()):
-            print "Unable to create internal folder ", name, " in : ", self.path_
+            print("Unable to create internal folder ", name, " in : ", self.path_)
             return
 
         dir = Directory(self.path_.getAbsolutePath() + "/" + name)
@@ -87,7 +88,7 @@ class DocumentFolder:
     def organize(self):
         d = Directory(self.path_)
         if (not d.exists()):
-            print "Error : attempt to organize a non existing folder : ", self.path_
+            print("Error : attempt to organize a non existing folder : ", self.path_)
             return
 
         for internFolderName in self.INTERN_FOLDERS:

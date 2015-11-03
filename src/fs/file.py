@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
-from path import Path
+from .path import Path
 
 class File:
     
@@ -32,7 +32,7 @@ class File:
                 f = open(self.path_.getAbsolutePath(), 'w')
                 f.close()
             except Exception as e:
-                print "Unable to create the file ", self.path_, " : ", e
+                print("Unable to create the file ", self.path_, " : ", e)
                 
     # Removes the file if it exists
     # If the file is a directory it is not removed
@@ -46,7 +46,7 @@ class File:
             f.write(content)
             f.close()
         except Exception as e:
-            print "Error : unable to write content in file : ", self.path_
+            print("Error : unable to write content in file : ", self.path_)
 
     def readContent(self):
         content = None
@@ -55,6 +55,6 @@ class File:
             content = f.read()
             f.close()
         except Exception as e:
-            print "Error : unable to write content in file : ", self.path_
+            print("Error : unable to write content in file : ", self.path_)
         return content
         

@@ -1,5 +1,5 @@
 import sys
-import bibtexparser
+from . import bibtexparser
 # -*- coding: utf-8 -*-
 
 sys.path.append("../..")
@@ -27,13 +27,13 @@ class BibtexReader:
             with open(self.path.getAbsolutePath()) as bibtex_file:
                 bibtex_str = bibtex_file.read()
         except Exception as e:
-            print "Unable to load the bibtex file ", self.path, " : ", e
+            print("Unable to load the bibtex file ", self.path, " : ", e)
             return None
                 
         bib_database = bibtexparser.loads(bibtex_str)
 
         for entry in bib_database.entries:
-            for field, value in entry.iteritems():
+            for field, value in entry.items():
                 if (field == "ENTRYTYPE"):
                     docType = entryTypeToDocType(value)
                     fields.setDocType(docType)

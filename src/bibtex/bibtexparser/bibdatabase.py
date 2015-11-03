@@ -3,7 +3,7 @@ import sys
 
 
 if sys.version_info.major == 2:
-    TEXT_TYPE = unicode
+    TEXT_TYPE = str
 else:
     TEXT_TYPE = str
 

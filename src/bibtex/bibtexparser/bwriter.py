@@ -111,4 +111,4 @@ class BibTexWriter(object):
 
     def _strings_to_bibtex(self, bib_database):
         return ''.join(['@string{{{0} = "{1}"}}\n{2}'.format(name, value, self.entry_separator)
-                        for name, value in bib_database.strings.items()])
+                        for name, value in list(bib_database.strings.items())])
