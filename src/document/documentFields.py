@@ -1,17 +1,65 @@
 # -*- coding: utf-8 -*-
 
+def strToDocType(typeStr):
+    docType = DocumentFields.UNKNOWN
+    if (typeStr in DocumentFields.TYPES_STR):
+        docType = DocumentFields.TYPES_STR[typeStr]
+    return docType
+
 class DocumentFields:
-    
+
     ARTICLE = 0
     BOOK = 1
-    THESIS = 2
-    SITE = 3
-    OTHER = 4
+    BOOKLET = 2
+    CONFERENCE = 3
+    INBOOK = 4
+    INCOLLECTION = 5
+    INPROCEEDINGS = 6
+    MANUAL = 7
+    MASTERTHESIS = 8
+    MISC = 9
+    PHDTHESIS = 10
+    PROCEEDINGS = 11
+    TECHREPORT  = 12
+    UNPUBLISHED = 13
+    UNKNOWN = 14
     
-    TYPES = [ARTICLE, BOOK, THESIS, SITE]
+    TYPES = [
+        ARTICLE,
+        BOOK,
+        BOOKLET,
+        CONFERENCE,
+        INBOOK,
+        INCOLLECTION,
+        INPROCEEDINGS,
+        MANUAL,
+        MASTERTHESIS,
+        MISC,
+        PHDTHESIS,
+        PROCEEDINGS,
+        TECHREPORT,
+        UNPUBLISHED
+    ]
+
+    TYPES_STR = {
+        "article":ARTICLE,
+        "book":BOOK,
+        "booklet":BOOKLET,
+        "conference":CONFERENCE,
+        "inbook":INBOOK,
+        "incollection":INCOLLECTION,
+        "inproceedings":INPROCEEDINGS,
+        "manual":MANUAL,
+        "masterthesis":MASTERTHESIS,
+        "misc":MISC,
+        "phdthesis":PHDTHESIS,
+        "proceedings":PROCEEDINGS,
+        "techreport":TECHREPORT,
+        "unpublished":UNPUBLISHED
+    }
     
     def __init__(self):
-        self.type_ = self.OTHER
+        self.type_ = self.UNKNOWN
         self.fields_ = dict()
         
     def hasField(self, field):
@@ -36,9 +84,9 @@ class DocumentFields:
         return self.type_
     
     def setDocType(self, docType):
-        if (docType != self.OTHER and not docType in self.TYPES):
+        if (docType != self.UNKNOWN and not docType in self.TYPES):
             print("Warning : incorrect type for document")
-            self.type_ = self.OTHER
+            self.type_ = self.UNKNOWN
         else:    
             self.type_ = docType
         

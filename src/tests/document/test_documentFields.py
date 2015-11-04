@@ -6,11 +6,13 @@ sys.path.append("../..")
 from tests.test import Test
 
 from document.documentFields import DocumentFields
+from document.documentFields import strToDocType
 
 class TestDocumentFields(Test):
     def __init__(self):
         Test.__init__(self, "DocumentFields")
         self.addTestFunction(self.createEmpty)
+        self.addTestFunction(self.strToDocType)
         self.addTestFunction(self.addField)
         self.addTestFunction(self.getEmptyField)
         self.addTestFunction(self.addMultipleFields)
@@ -19,7 +21,27 @@ class TestDocumentFields(Test):
     def createEmpty(self):
         a = DocumentFields()
         assert (a.getNbFields() == 0)
-        assert (a.getDocType() == DocumentFields.OTHER)
+        assert (a.getDocType() == DocumentFields.UNKNOWN)
+
+    def strToDocType(self):
+        fields = DocumentFields
+        assert(strToDocType("article") == DocumentFields.ARTICLE)
+        assert(strToDocType("book") == DocumentFields.BOOK)
+        assert(strToDocType("booklet") == DocumentFields.BOOKLET)
+        assert(strToDocType("conference") == DocumentFields.CONFERENCE)
+        assert(strToDocType("inbook") == DocumentFields.INBOOK)
+        assert(strToDocType("incollection") == DocumentFields.INCOLLECTION)
+        assert(strToDocType("inproceedings") == DocumentFields.INPROCEEDINGS)
+        assert(strToDocType("manual") == DocumentFields.MANUAL)
+        assert(strToDocType("masterthesis") == DocumentFields.MASTERTHESIS)
+        assert(strToDocType("misc") == DocumentFields.MISC)
+        assert(strToDocType("phdthesis") == DocumentFields.PHDTHESIS)
+        assert(strToDocType("proceedings") == DocumentFields.PROCEEDINGS)
+        assert(strToDocType("techreport") == DocumentFields.TECHREPORT)
+        assert(strToDocType("unpublished") == DocumentFields.UNPUBLISHED)
+
+        assert(strToDocType("other") == DocumentFields.UNKNOWN)
+        assert(strToDocType("éèà") == DocumentFields.UNKNOWN)
     
     def addField(self):
         a = DocumentFields()
@@ -52,8 +74,8 @@ class TestDocumentFields(Test):
             a.setDocType(t)
             assert (a.getDocType() == t)
         
-        a.setDocType(DocumentFields.OTHER)
-        assert (a.getDocType() == DocumentFields.OTHER)
+        a.setDocType(DocumentFields.UNKNOWN)
+        assert (a.getDocType() == DocumentFields.UNKNOWN)
         
     
 t = TestDocumentFields()

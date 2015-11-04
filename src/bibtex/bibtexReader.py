@@ -5,15 +5,8 @@ from . import bibtexparser
 sys.path.append("../..")
 
 from fs.path import Path
+from document.documentFields import strToDocType
 from document.documentFields import DocumentFields
-
-def entryTypeToDocType(entryType):
-    docType = DocumentFields.OTHER
-    if(entryType == "article"):
-        docType = DocumentFields.ARTICLE
-    elif(entryType == "book"):
-        docType = DocumentFields.BOOK
-    return docType
         
 class BibtexReader:
     
@@ -35,7 +28,7 @@ class BibtexReader:
         for entry in bib_database.entries:
             for field, value in entry.items():
                 if (field == "ENTRYTYPE"):
-                    docType = entryTypeToDocType(value)
+                    docType = strToDocType(value)
                     fields.setDocType(docType)
                 elif (field != "ID"):
                     fields.setField(field, value)
