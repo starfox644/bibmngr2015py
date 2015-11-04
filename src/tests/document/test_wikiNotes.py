@@ -63,14 +63,14 @@ class TestWikiNotes(Test):
 
     def descTableAuthors(self):
         d = DocumentFields()
-        d.setField("author", "John Bruf, Tommy Bamo")
+        d.setField("author", "Bruf, John and Bamo, Tomy")
         notes = WikiNotes(d)
         notes.createDescriptionTable()
         content = notes.getDocumentContent()
 
         expectedContent = WikiNotes.TABLE_HEADER
         expectedContent += ( "|Auteurs :\n"
-                            "| \'\'\'John Bruf, Tommy Bamo\'\'\'\n"
+                            "| \'\'\'John Bruf, Tomy Bamo\'\'\'\n"
                             "|-\n")
         expectedContent += WikiNotes.TABLE_END
 
@@ -125,7 +125,7 @@ class TestWikiNotes(Test):
         d = DocumentFields()
         d.setField("title", "document about internet")
         d.setField("year", "2014")
-        d.setField("author", "John Bruf, Tommy Bamo")
+        d.setField("author", "Bruf, John and Bamo, Tomy")
         d.setField("keywords", "Computer science, Photography")
         d.setField("journal", "Journal of Computer Science")
         notes = WikiNotes(d)
@@ -138,7 +138,7 @@ class TestWikiNotes(Test):
                             "| \'\'\'2014\'\'\'\n"
                             "|-\n"
                             "|Auteurs :\n"
-                            "| \'\'\'John Bruf, Tommy Bamo\'\'\'\n"
+                            "| \'\'\'John Bruf, Tomy Bamo\'\'\'\n"
                             "|-\n"
                             "|Mots-cles :\n"
                             "| \'\'\'Computer science, Photography\'\'\'\n"

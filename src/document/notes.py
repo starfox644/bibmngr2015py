@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from fs.file import File
+from document.fieldsFormatting import *
 
 class Notes:
 
@@ -48,10 +49,19 @@ class Notes:
     def getFieldTableEntry(self, name, value):
         return name + " = " + value + "\n"
 
+    def formatField(self, fieldName, fieldValue):
+        newFieldValue = fieldValue
+        if(fieldName == "author"):
+            newFieldValue = formatAuthors(fieldValue)
+        elif(fieldName == "journal"):
+            newFieldValue = formatJournal(fieldValue)
+        return newFieldValue
+
     def addFieldInTable(self, tableContent, fieldName):
         content = tableContent
         if (self.fields_.hasField(fieldName)):
             fieldValue = self.fields_.getField(fieldName)
+            fieldValue = self.formatField(fieldName, fieldValue)
             if (fieldName in self.TRANSLATION):
                 name = self.TRANSLATION[fieldName]
             else:

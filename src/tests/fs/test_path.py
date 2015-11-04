@@ -3,63 +3,57 @@
 import sys
 sys.path.append("../..")
 
+import unittest
+from unittest import TestCase
+
 from fs.path import Path
-from tests.test import Test
     
-class TestPath(Test):
+class TestPath(TestCase):
     
-    def __init__(self):
-        Test.__init__(self, "Path")
-        self.addTestFunction(self.createEmpty)
-        self.addTestFunction(self.createLocal)
-        self.addTestFunction(self.createAbsolute)
-        self.addTestFunction(self.createNotClean)
-        self.addTestFunction(self.createMultipleExtensions)
-    
-    def createEmpty(self):
+    def test_createEmpty(self):
         p = Path()
-        assert(p.getAbsolutePath() == "")
-        assert(p.getAbsoluteBasename() == "")
-        assert(p.getFileName() == "")
-        assert(p.getFileBasename() == "")
-        assert(p.getExtension() == "")
+        self.assertEqual(p.getAbsolutePath(), "")
+        self.assertEqual(p.getAbsoluteBasename(), "")
+        self.assertEqual(p.getFileName(), "")
+        self.assertEqual(p.getFileBasename(), "")
+        self.assertEqual(p.getExtension(), "")
     
-    def createLocal(self):
+    def test_createLocal(self):
         path = "file.pdf"
         p = Path(path)
-        assert(p.getAbsolutePath() == "file.pdf")
-        assert(p.getAbsoluteBasename() == "file")
-        assert(p.getFileName() == "file.pdf")
-        assert(p.getFileBasename() == "file")
-        assert(p.getExtension() == ".pdf")
+        self.assertEqual(p.getAbsolutePath(), "file.pdf")
+        self.assertEqual(p.getAbsoluteBasename(), "file")
+        self.assertEqual(p.getFileName(), "file.pdf")
+        self.assertEqual(p.getFileBasename(), "file")
+        self.assertEqual(p.getExtension(), ".pdf")
     
-    def createAbsolute(self):
+    def test_createAbsolute(self):
         path = "a/b/cd/file.pdf"
         p = Path(path)
-        assert(p.getAbsolutePath() == "a/b/cd/file.pdf")
-        assert(p.getAbsoluteBasename() == "a/b/cd/file")
-        assert(p.getFileName() == "file.pdf")
-        assert(p.getFileBasename() == "file")
-        assert(p.getExtension() == ".pdf")
+        self.assertEqual(p.getAbsolutePath(), "a/b/cd/file.pdf")
+        self.assertEqual(p.getAbsoluteBasename(), "a/b/cd/file")
+        self.assertEqual(p.getFileName(), "file.pdf")
+        self.assertEqual(p.getFileBasename(), "file")
+        self.assertEqual(p.getExtension(), ".pdf")
     
-    def createNotClean(self):
+    def test_createNotClean(self):
         path = "a/b/../cd//file.pdf"
         p = Path(path)
-        assert(p.getAbsolutePath() == "a/cd/file.pdf")
-        assert(p.getAbsoluteBasename() == "a/cd/file")
-        assert(p.getFileName() == "file.pdf")
-        assert(p.getFileBasename() == "file")
-        assert(p.getExtension() == ".pdf")
+        self.assertEqual(p.getAbsolutePath(), "a/cd/file.pdf")
+        self.assertEqual(p.getAbsoluteBasename(), "a/cd/file")
+        self.assertEqual(p.getFileName(), "file.pdf")
+        self.assertEqual(p.getFileBasename(), "file")
+        self.assertEqual(p.getExtension(), ".pdf")
     
-    def createMultipleExtensions(self):
+    def test_createMultipleExtensions(self):
         path = "a/b/c.tar.gz"
         p = Path(path)
-        assert(p.getAbsolutePath() == "a/b/c.tar.gz")
-        assert(p.getAbsoluteBasename() == "a/b/c.tar")
-        assert(p.getFileName() == "c.tar.gz")
-        assert(p.getFileBasename() == "c.tar")
-        assert(p.getExtension() == ".gz")
+        self.assertEqual(p.getAbsolutePath(), "a/b/c.tar.gz")
+        self.assertEqual(p.getAbsoluteBasename(), "a/b/c.tar")
+        self.assertEqual(p.getFileName(), "c.tar.gz")
+        self.assertEqual(p.getFileBasename(), "c.tar")
+        self.assertEqual(p.getExtension(), ".gz")
 
-t = TestPath()
-t.runTests()
+if __name__ == '__main__':
+    unittest.main()
 

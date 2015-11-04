@@ -3,62 +3,63 @@
 import sys
 sys.path.append("../..")
 
+import os
+import shutil
+
 from fs.directory import Directory
 from fs.file import File
 from fs.path import Path
-from tests.test import Test
 
-class TestDirectory(Test):
-    def __init__(self):
-        Test.__init__(self, "Directory")
-        d = Directory("dir")
-        d.removeDir()
-        self.addTestFunction(self.create)
-        self.addTestFunction(self.remove)
-        self.addTestFunction(self.createTree)
-        self.addTestFunction(self.content)
-        self.addTestFunction(self.containsFolder)
+import unittest
+from unittest import TestCase
 
-    def create(self):
+class TestDirectory(TestCase):
+
+    def setUp(self):
+        if(os.path.exists("dir")):
+            shutil.rmtree("dir")
+
+    def test_create(self):
         d = Directory("dir")
-        assert(not d.exists())
+        self.assertFalse(d.exists())
     
         d.createDir()
-        assert(d.exists())
-        assert(not d.isRegularFile())
-        assert(d.isDirectory())
+        self.assertTrue(d.exists())
+        self.assertFalse(d.isRegularFile())
+        self.assertTrue(d.isDirectory())
     
-    def remove(self):
+    def test_remove(self):
         d = Directory("dir")
+        d.createDir()
         d.removeFile()
-        assert(d.exists())
+        self.assertTrue(d.exists())
     
         d.removeDir()
-        assert(not d.exists())
+        self.assertFalse(d.exists())
     
-    def createTree(self):
+    def test_createTree(self):
         d = Directory("dir/fg/a")
-        assert(not d.exists())
+        self.assertFalse(d.exists())
     
         d.createDir()
-        assert(not d.exists())
+        self.assertFalse(d.exists())
     
         d.createTree()
-        assert(d.exists())
+        self.assertTrue(d.exists())
     
         d.removeFile()
-        assert(d.exists())
+        self.assertTrue(d.exists())
     
         d.removeDir()
-        assert(not d.exists())
+        self.assertFalse(d.exists())
     
         d = Directory("dir")
-        assert(d.exists())
+        self.assertTrue(d.exists())
     
         d.removeDir()
-        assert(not d.exists())
+        self.assertFalse(d.exists())
         
-    def content(self):
+    def test_content(self):
         d = Directory("dir")
         d1 = Directory("dir/a/b")
         d2 = Directory("dir/c")
@@ -73,17 +74,17 @@ class TestDirectory(Test):
         f2.createFile()
         
         l = d.getFilesList()
-        assert (l == {"dir/e.txt", "dir/g.txt"})
+        self.assertEqual(l,  {"dir/e.txt", "dir/g.txt"})
         
         l = d.getDirsList()
-        assert (l == {"dir/a", "dir/c", "dir/d"})
+        self.assertEqual(l, {"dir/a", "dir/c", "dir/d"})
         
         l = d.getContentList()
-        assert (l == {"dir/e.txt", "dir/g.txt", "dir/a", "dir/c", "dir/d"})
+        self.assertEqual(l, {"dir/e.txt", "dir/g.txt", "dir/a", "dir/c", "dir/d"})
         
         d.removeDir()
 
-    def containsFolder(self):
+    def test_containsFolder(self):
         d = Directory("dir")
         d1 = Directory("dir/a/b")
         d2 = Directory("dir/c")
@@ -92,17 +93,16 @@ class TestDirectory(Test):
         d1.createTree()
         d2.createTree()
 
-        assert(d.containsFolder("a"))
-        assert(d.containsFolder("c"))
-        assert(not d.containsFolder("b"))
-        assert(d3.containsFolder("b"))
-        assert(not d3.containsFolder("a"))
+        self.assertTrue(d.containsFolder("a"))
+        self.assertTrue(d.containsFolder("c"))
+        self.assertFalse(d.containsFolder("b"))
+        self.assertTrue(d3.containsFolder("b"))
+        self.assertFalse(d3.containsFolder("a"))
 
         d.removeDir()
 
-
-t = TestDirectory()
-t.runTests()
+if __name__ == '__main__':
+    unittest.main()
 
 
 

@@ -71,7 +71,7 @@ class TestLatexNotes(Test):
 
     def descTableAuthors(self):
         d = DocumentFields()
-        d.setField("author", "John Bruf, Tommy Bamo")
+        d.setField("author", "Bruf, John and Bamo, Tomy")
         notes = LatexNotes(d)
         notes.createDescriptionTable()
         content = notes.getDocumentContent()
@@ -79,7 +79,7 @@ class TestLatexNotes(Test):
         expectedContent += ("\\begin{longtable}[c]{@{}ll@{}}\n"
                             "\\toprule\\addlinespace\n"
                             "\n"
-                            "Auteurs : & \\textbf{John Bruf, Tommy Bamo}\n"
+                            "Auteurs : & \\textbf{John Bruf, Tomy Bamo}\n"
                             "\\\\\\addlinespace\n"
                             "\n"
                             "\\bottomrule\n"
@@ -145,7 +145,7 @@ class TestLatexNotes(Test):
         d = DocumentFields()
         d.setField("title", "document about internet")
         d.setField("year", "2014")
-        d.setField("author", "John Bruf, Tommy Bamo")
+        d.setField("author", "Bruf, John and Bamo, Tomy")
         d.setField("keywords", "Computer science, Photography")
         d.setField("journal", "Journal of Computer Science")
         notes = LatexNotes(d)
@@ -162,7 +162,7 @@ class TestLatexNotes(Test):
                             "Annee : & \\textbf{2014}\n"
                             "\\\\\\addlinespace\n"
                             "\n"
-                            "Auteurs : & \\textbf{John Bruf, Tommy Bamo}\n"
+                            "Auteurs : & \\textbf{John Bruf, Tomy Bamo}\n"
                             "\\\\\\addlinespace\n"
                             "\n"
                             "Mots-cles : & \\textbf{Computer science, Photography}\n"

@@ -60,18 +60,18 @@ class TestNotes(Test):
 
     def descTableAuthors(self):
         d = DocumentFields()
-        d.setField("author", "John Bruf, Tommy Bamo")
+        d.setField("author", "Bruf, John and Bamo, Tomy")
         notes = Notes(d)
         notes.createDescriptionTable()
         content = notes.getDocumentContent()
         expectedContent = Notes.TABLE_HEADER
-        expectedContent += "Auteurs = John Bruf, Tommy Bamo\n"
+        expectedContent += "Auteurs = John Bruf, Tomy Bamo\n"
         expectedContent += Notes.TABLE_END
-        contentLines = content.splitlines()
-        expLines = expectedContent.splitlines()
-        d = difflib.Differ()
-        diff = d.compare(contentLines, expLines)
-        # print "\n".join(diff)
+        # contentLines = content.splitlines()
+        # expLines = expectedContent.splitlines()
+        # d = difflib.Differ()
+        # diff = d.compare(contentLines, expLines)
+        # print ("\n".join(diff))
         assert(content == expectedContent)
 
     def descTableKeywords(self):
@@ -110,7 +110,7 @@ class TestNotes(Test):
         d = DocumentFields()
         d.setField("title", "document about internet")
         d.setField("year", "2014")
-        d.setField("author", "John Bruf, Tommy Bamo")
+        d.setField("author", "Bruf, John and Bamo, Tomy")
         d.setField("keywords", "Computer science, Photography")
         d.setField("journal", "Journal of Computer Science")
         notes = Notes(d)
@@ -118,7 +118,7 @@ class TestNotes(Test):
         content = notes.getDocumentContent()
         expectedContent = Notes.TABLE_HEADER
         expectedContent += "Annee = 2014\n"
-        expectedContent += "Auteurs = John Bruf, Tommy Bamo\n"
+        expectedContent += "Auteurs = John Bruf, Tomy Bamo\n"
         expectedContent += "Mots-cles = Computer science, Photography\n"
         expectedContent += "Journal = Journal of Computer Science\n"
         expectedContent += Notes.TABLE_END
@@ -135,7 +135,7 @@ class TestNotes(Test):
         d = DocumentFields()
         d.setField("title", "document about internet")
         d.setField("year", "2014")
-        d.setField("author", "John Bruf, Tommy Bamo")
+        d.setField("author", "Bruf, John and Bamo, Tomy")
         d.setField("keywords", "Computer science, Photography")
         d.setField("journal", "Journal of Computer Science")
         notes = Notes(d)
@@ -144,7 +144,7 @@ class TestNotes(Test):
         expectedContent = "document about internet\n\n"
         expectedContent += Notes.TABLE_HEADER
         expectedContent += "Annee = 2014\n"
-        expectedContent += "Auteurs = John Bruf, Tommy Bamo\n"
+        expectedContent += "Auteurs = John Bruf, Tomy Bamo\n"
         expectedContent += "Mots-cles = Computer science, Photography\n"
         expectedContent += "Journal = Journal of Computer Science\n"
         expectedContent += Notes.TABLE_END
@@ -153,7 +153,7 @@ class TestNotes(Test):
         # expLines = expectedContent.splitlines()
         # d = difflib.Differ()
         # diff = d.compare(contentLines, expLines)
-        # print "\n".join(diff)
+        # print ("\n".join(diff))
 
         assert(content == expectedContent)
 
