@@ -8,8 +8,8 @@ class Notes:
     TABLE_HEADER = "----- Description -----\n\n"
     TABLE_END = "-----------------------\n\n"
 
-    FIELDS_IN_TABLE = ["year", "author", "keywords", "journal"]
-    TRANSLATION = {'year':'Annee', 'author':"Auteurs", "keywords":"Mots-cles"}
+    FIELDS_IN_TABLE = ["year", "author", "keyword", "journal", "booktitle"]
+    TRANSLATION = {'year':'Annee', 'author':"Auteurs", "keyword":"Mots-cles", "booktitle":"revue"}
 
     def __init__(self, fields):
         self.fields_ = fields
