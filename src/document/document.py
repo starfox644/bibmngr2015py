@@ -20,7 +20,7 @@ class Document:
             success = True
         return success
 
-    def createDocumentFolder(self, folderPath="."):
+    def createDocumentFolder(self, bibfilePath, folderPath="."):
         self.folderPath_ = folderPath
         if (self.fields_ == None):
             print("Error : attempt to create a document folder without fields at : ", folderPath)
@@ -29,5 +29,5 @@ class Document:
         folder = DocumentFolder()
         folder.setDocFields(self.fields_)
         folder.create(folderPath)
-        folder.organize()
+        folder.organize([bibfilePath])
 

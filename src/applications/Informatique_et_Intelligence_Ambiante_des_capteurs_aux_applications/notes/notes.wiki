@@ -1,8 +1,0 @@
-{| border="0" cellpadding="2" cellspacing="0"
-|Annee :
-| '''2012'''
-|-
-|Auteurs :
-| '''Sèdes, Florence and Delot, Thierry and Calvary, Gaelle and Tigli, Jean-Yves'''
-|-
-|}

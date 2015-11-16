@@ -2,8 +2,9 @@
 
 def strToDocType(typeStr):
     docType = DocumentFields.UNKNOWN
-    if (typeStr in DocumentFields.TYPES_STR):
-        docType = DocumentFields.TYPES_STR[typeStr]
+    s = typeStr.lower()
+    if (s in DocumentFields.TYPES_STR):
+        docType = DocumentFields.TYPES_STR[s]
     return docType
 
 class DocumentFields:

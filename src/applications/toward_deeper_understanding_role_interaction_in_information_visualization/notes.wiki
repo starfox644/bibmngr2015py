@@ -1,0 +1,14 @@
+{| border="0" cellpadding="2" cellspacing="0"
+|Annee :
+| '''2007'''
+|-
+|Auteurs :
+| '''Ji Soo Yi, Youn ah Kang, John Stasko, Julie Jacko'''
+|-
+|Mots-cles :
+| '''Information visualization, Information visualization, interaction, interaction techniques, taxonomy, visual analytics, interaction, interaction techniques, taxonomy, visual analytics'''
+|-
+|Journal :
+| '''IEEE Transactions on Visualization and Computer Graphics'''
+|-
+|}

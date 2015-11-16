@@ -5,6 +5,7 @@ from .latexNotes import LatexNotes
 from .wikiNotes import WikiNotes
 from .notes import Notes
 from fs.path import Path
+from fs.file import File
 from fs.directory import Directory
 
 
@@ -46,7 +47,6 @@ class DocumentFolder:
         name = ""
         if (self.fields_ != None and self.fields_.hasTitle()):
             title = self.fields_.getField("title")
-            # title = str(filter(isAlphaNum, title))
             title = ''.join(ch for ch in title if ch.isalnum() or ch.isspace())
             words = title.split()
             for i, w in enumerate(words):
@@ -54,7 +54,7 @@ class DocumentFolder:
                     name += w
                     if (i < len(words)-1):
                         name += "_"
-        return name
+        return name.lower()
 
     # Creates a document folder in the directory referenced by the given path
     # See the method computeFolderName for more details.
@@ -85,17 +85,13 @@ class DocumentFolder:
     def delete(self):
         Directory(self.path_).removeDir()
 
-    def organize(self):
+    def organize(self, filesToMoveIn=None):
         d = Directory(self.path_)
         if (not d.exists()):
             print("Error : attempt to organize a non existing folder : ", self.path_)
             return
 
-        for internFolderName in self.INTERN_FOLDERS:
-            if (not d.containsFolder(internFolderName)):
-                self.createInternFolder(internFolderName)
-
-        notesPath = self.path_.getAbsolutePath() + "/" + self.NOTES_DIR_NAME
+        notesPath = self.path_.getAbsolutePath()
         latexNotes = LatexNotes(self.fields_)
         latexNotes.createAllContent()
         latexNotes.writeContent(notesPath)
@@ -103,10 +99,16 @@ class DocumentFolder:
         wikiNotes = WikiNotes(self.fields_)
         wikiNotes.createAllContent()
         wikiNotes.writeContent(notesPath)
-        # notes = Notes(self.fields_)
+
+        if(filesToMoveIn is not None):
+            for file in filesToMoveIn:
+                f = file
+                if(type(file) != File):
+                    f = File(file)
+                f.moveFile(self.path_.getAbsolutePath())
 
     def getNotesFilePath(self):
-        path = self.path_.getAbsolutePath() + "/" + self.NOTES_DIR_NAME + "/" + LatexNotes.FILENAME
+        path = self.path_.getAbsolutePath() + "/" + LatexNotes.FILENAME
         return path
 
     def createVideoFolder(self):

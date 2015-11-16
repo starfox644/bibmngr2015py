@@ -18,7 +18,7 @@ def main():
 
     doc = Document()
     if(doc.readFields(bibfile)):
-        doc.createDocumentFolder(path)
+        doc.createDocumentFolder(bibfile, path)
 
 if __name__ == "__main__":
     main()

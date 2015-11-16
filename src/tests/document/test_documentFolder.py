@@ -3,28 +3,30 @@
 import sys
 sys.path.append("../..")
 
-from tests.test import Test
+import unittest
+from unittest import TestCase
 
 from fs.directory import Directory
 from fs.file import File
 from document.documentFields import DocumentFields
 from document.documentFolder import DocumentFolder
 
-class TestDocumentFolder(Test):
-    def __init__(self):
-        Test.__init__(self, "DocumentFolder")
-        self.titles = ["document about  science",
-                       "document: about \"science\"",
-                       "document: about the \"science\" and the (internet)"]
-        self.folderNames = ["document_about_science",
-                            "document_about_science",
-                            "document_about_science_internet"]
-        self.addTestFunction(self.folderName)
-        self.addTestFunction(self.create)
-        self.addTestFunction(self.internFolders)
-        self.addTestFunction(self.organize)
+class TestDocumentFolder(TestCase):
 
-    def folderName(self):
+    titles = [  "document about  science",
+                "document: about \"science\"",
+                "document: about the \"science\" and the (internet)",
+                "Document About  Science",
+                "Document: about \"Science\"",
+                "Document: about the \"Science\" and the (Internet)"]
+    folderNames = [ "document_about_science",
+                    "document_about_science",
+                    "document_about_science_internet",
+                    "document_about_science",
+                    "document_about_science",
+                    "document_about_science_internet"]
+
+    def test_folderName(self):
         a = DocumentFields()
         a.setField("title", "document")
         
@@ -34,35 +36,37 @@ class TestDocumentFolder(Test):
         for i, title in enumerate(self.titles):
             a.setField("title", title)
             name = d.computeFolderName()
-            assert(name == self.folderNames[i])
+            self.assertEqual(name, self.folderNames[i])
 
-    def create(self):
+    def test_create(self):
         a = DocumentFields()
         a.setField("title", "document")
 
         d = DocumentFolder()
         d.setDocFields(a)
 
+        # Creation in local folder
         for title in self.titles:
             a.setField("title", title)
             d.create()
-            assert(d.getDir().exists())
+            self.assertTrue(d.getDir().exists())
             d.delete()
-            assert(not d.getDir().exists())
+            self.assertFalse(d.getDir().exists())
 
         dir = Directory("documents")
         dir.createDir()
 
+        # Creaton in another folder
         for title in self.titles:
             a.setField("title", title)
             d.create(dir.getPath().getAbsolutePath())
-            assert(d.getDir().exists())
+            self.assertTrue(d.getDir().exists())
             d.delete()
-            assert(not d.getDir().exists())
+            self.assertFalse(d.getDir().exists())
 
         dir.removeDir()
 
-    def internFolders(self):
+    def test_internFolders(self):
         a = DocumentFields()
         a.setField("title", "document")
 
@@ -70,26 +74,26 @@ class TestDocumentFolder(Test):
         d.setDocFields(a)
         d.create()
 
-        assert(d.getDir().exists())
+        self.assertTrue(d.getDir().exists())
 
-        assert(not d.hasVideoFolder())
-        assert(not d.hasImageFolder())
-        assert(not d.hasNotesFolder())
-        assert(not d.hasDescFolder())
+        self.assertFalse(d.hasVideoFolder())
+        self.assertFalse(d.hasImageFolder())
+        self.assertFalse(d.hasNotesFolder())
+        self.assertFalse(d.hasDescFolder())
 
         d.createVideoFolder()
         d.createImageFolder()
         d.createNotesFolder()
         d.createDescFolder()
 
-        assert(d.hasVideoFolder())
-        assert(d.hasImageFolder())
-        assert(d.hasNotesFolder())
-        assert(d.hasDescFolder())
+        self.assertTrue(d.hasVideoFolder())
+        self.assertTrue(d.hasImageFolder())
+        self.assertTrue(d.hasNotesFolder())
+        self.assertTrue(d.hasDescFolder())
 
         d.delete()
 
-    def organize(self):
+    def test_organize(self):
         fields = DocumentFields()
         fields.setField("title", "document about internet")
         fields.setField("year", "2014")
@@ -105,26 +109,54 @@ class TestDocumentFolder(Test):
 
         d.create()
 
-        assert(not d.hasVideoFolder())
-        assert(not d.hasImageFolder())
-        assert(not d.hasNotesFolder())
-        assert(not d.hasDescFolder())
+        self.assertFalse(d.hasVideoFolder())
+        self.assertFalse(d.hasImageFolder())
+        self.assertFalse(d.hasNotesFolder())
+        self.assertFalse(d.hasDescFolder())
 
         d.organize()
 
-        assert(d.hasVideoFolder())
-        assert(d.hasImageFolder())
-        assert(d.hasNotesFolder())
-        assert(d.hasDescFolder())
+        self.assertFalse(d.hasVideoFolder())
+        self.assertFalse(d.hasImageFolder())
+        self.assertFalse(d.hasNotesFolder())
+        self.assertFalse(d.hasDescFolder())
 
         notesPath = d.getNotesFilePath()
         print(notesPath)
-        assert(File(notesPath).exists())
+        self.assertTrue(File(notesPath).exists())
+
+        d.delete()
+
+    def test_organizeWithFiles(self):
+        fields = DocumentFields()
+        fields.setField("title", "document about internet")
+        d = DocumentFolder()
+        d.setDocFields(fields)
+
+        bibfile = File("bibfile.bib")
+        bibfile.createFile()
+        pdffilename = "pdffile.pdf"
+        pdffile = File(pdffilename)
+        pdffile.createFile()
+        fileList = [bibfile, pdffilename]
+
+        d.create()
+
+        d.organize(fileList)
+        self.assertFalse(File("bibfile.bib").exists())
+        self.assertFalse(File("pdffile.pdf").exists())
+
+        folderPath = d.getDir().getPath().getAbsolutePath()
+        newbibfile = File(folderPath + "/" + "bibfile.bib")
+        newpdffile = File(folderPath + "/" + "pdffile.pdf")
+
+        self.assertTrue(newbibfile.exists())
+        self.assertTrue(newpdffile.exists())
 
         d.delete()
 
 
-t = TestDocumentFolder()
-t.runTests()
+if __name__ == '__main__':
+    unittest.main()
 
 

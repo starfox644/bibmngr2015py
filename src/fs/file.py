@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import os
+import shutil
 from .path import Path
 
 class File:
@@ -39,6 +40,10 @@ class File:
     def removeFile(self):  
         if self.exists() and self.isRegularFile():
             os.remove(self.path_.getAbsolutePath())
+
+    def moveFile(self, newDest):
+        shutil.move(self.getPath().getAbsolutePath(), newDest)
+        self.path_ = Path(newDest)
 
     def writeContent(self, content):
         try:

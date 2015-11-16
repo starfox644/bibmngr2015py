@@ -21,11 +21,14 @@ class TestFieldsFomatting(Test):
         newAuthors = "Su Yang Xue, Aseem J. Agarwala, Julie Dorsey Lamonde, Holly Marie Rushmeier"
         assert(formatAuthors(authors) == newAuthors)
 
+        authors = "Su Yang Xue and Aseem J. Agarwala and Julie Dorsey Lamonde and Holly Marie Rushmeier"
+        newAuthors = "Su Yang Xue, Aseem J. Agarwala, Julie Dorsey Lamonde, Holly Marie Rushmeier"
+        assert(formatAuthors(authors) == newAuthors)
+
     def journal(self):
         journal = "ACM trans. on graph."
         newJournal = "ACM Transactions on Graphics"
         result = formatJournal(journal)
-        # print(result)
         assert(formatJournal(journal) == newJournal)
 
 t = TestFieldsFomatting()

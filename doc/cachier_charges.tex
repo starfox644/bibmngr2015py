@@ -1,0 +1,50 @@
+\documentclass[10pt]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{graphicx}
+\usepackage[top=1cm, bottom=1cm, left=1cm, right=1cm]{geometry}
+% \usepackage[T1]{fontenc}
+
+\begin{document}
+
+% \section*{blabla}
+\title{Cahier des charges pour bibmanagerpy}
+\author{Jérémy}
+\maketitle
+
+\section{Description}
+
+Permet de gérer une bibliographie, par ex. articles, livres...
+
+\subsection{Médias gérés}
+
+\begin{itemize}
+ \item Articles Scientifiques
+ \item Livres
+\end{itemize}
+
+\section{Fonctions}
+
+\subsection{Lecture d'un bibtex}
+
+Prend un bibtex en entrée et affiche ses infos.
+
+\subsection{Génération de descriptions}
+
+Génère des descriptions du document dans un certain format de fichier, par ex. latex.
+La description comporte les champs principaux comme l'auteur et peut comporter certains champs à remplir comme 
+les URL ou la description.
+
+\subsection{Création d'un dossier}
+
+Crée un dossier correspondant à un fichier bibtex fourni en entrée.
+Les fichiers de description précédemment décrits sont créés dans ce dossier.
+
+\subsection{Création d'une liste de dossiers}
+
+Crée une liste de dossiers à partir d'une liste de bibtex fournis ou récupérés dans un dossier.
+
+\end{document}
+
+
+
+

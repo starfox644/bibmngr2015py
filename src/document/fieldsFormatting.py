@@ -7,16 +7,19 @@ JOURNAL_ABBREV = {"trans.":"Transactions",
 def formatAuthors(authors):
     newAuthor = ""
     authorList = authors.split("and")
-    newAuthorList = []
-    for i, a in enumerate(authorList):
-        parts = a.split(",")
-        if (len(parts) == 2):
-            authorStr = parts[1].strip() + " " + parts[0].strip()
+    if (len(authorList) > 1):
+        for i, a in enumerate(authorList):
+            parts = a.split(",")
+            if (len(parts) == 2):
+                authorStr = parts[1].strip() + " " + parts[0].strip()
+            else:
+                print("Warning : not 2 components author")
+                authorStr = parts[0].strip()
             newAuthor += authorStr
             if (i != len(authorList) - 1):
                 newAuthor += ", "
-        else:
-            print("Warning : not 2 components author")
+    else:
+        newAuthor = authors
     return newAuthor
 
 def formatJournal(journal):

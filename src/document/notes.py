@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from fs.file import File
-from document.fieldsFormatting import *
+from .fieldsFormatting import *
 
 class Notes:
 

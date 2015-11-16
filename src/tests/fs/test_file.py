@@ -35,6 +35,20 @@ class TestFile(TestCase):
         f.removeFile()
         self.assertFalse(f.exists())
 
+    def test_move(self):
+        f = File("hello")
+        f.createFile()
+        f.moveFile("newdest")
+
+        self.assertTrue(f.exists())
+        self.assertEqual(f.getPath().getAbsolutePath(), "newdest")
+
+        oldFile = File("hello")
+        self.assertFalse(oldFile.exists())
+
+        f.removeFile()
+        self.assertFalse(f.exists())
+
     def test_readWrite(self):
         f = File("test_read_write.txt")
         content = "Hello\nI am a file"
