@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 def strToDocType(typeStr):
-    docType = DocumentFields.UNKNOWN
+    docType = DocumentFields.DOC_UNKNOWN
     s = typeStr.lower()
     if (s in DocumentFields.TYPES_STR):
         docType = DocumentFields.TYPES_STR[s]
@@ -9,58 +9,58 @@ def strToDocType(typeStr):
 
 class DocumentFields:
 
-    ARTICLE = 0
-    BOOK = 1
-    BOOKLET = 2
-    CONFERENCE = 3
-    INBOOK = 4
-    INCOLLECTION = 5
-    INPROCEEDINGS = 6
-    MANUAL = 7
-    MASTERTHESIS = 8
-    MISC = 9
-    PHDTHESIS = 10
-    PROCEEDINGS = 11
-    TECHREPORT  = 12
-    UNPUBLISHED = 13
-    UNKNOWN = 14
+    DOC_ARTICLE = 0
+    DOC_BOOK = 1
+    DOC_BOOKLET = 2
+    DOC_CONFERENCE = 3
+    DOC_INBOOK = 4
+    DOC_INCOLLECTION = 5
+    DOC_INPROCEEDINGS = 6
+    DOC_MANUAL = 7
+    DOC_MASTERTHESIS = 8
+    DOC_MISC = 9
+    DOC_PHDTHESIS = 10
+    DOC_PROCEEDINGS = 11
+    DOC_TECHREPORT  = 12
+    DOC_UNPUBLISHED = 13
+    DOC_UNKNOWN = 14
     
     TYPES = [
-        ARTICLE,
-        BOOK,
-        BOOKLET,
-        CONFERENCE,
-        INBOOK,
-        INCOLLECTION,
-        INPROCEEDINGS,
-        MANUAL,
-        MASTERTHESIS,
-        MISC,
-        PHDTHESIS,
-        PROCEEDINGS,
-        TECHREPORT,
-        UNPUBLISHED
+        DOC_ARTICLE,
+        DOC_BOOK,
+        DOC_BOOKLET,
+        DOC_CONFERENCE,
+        DOC_INBOOK,
+        DOC_INCOLLECTION,
+        DOC_INPROCEEDINGS,
+        DOC_MANUAL,
+        DOC_MASTERTHESIS,
+        DOC_MISC,
+        DOC_PHDTHESIS,
+        DOC_PROCEEDINGS,
+        DOC_TECHREPORT,
+        DOC_UNPUBLISHED
     ]
 
     TYPES_STR = {
-        "article":ARTICLE,
-        "book":BOOK,
-        "booklet":BOOKLET,
-        "conference":CONFERENCE,
-        "inbook":INBOOK,
-        "incollection":INCOLLECTION,
-        "inproceedings":INPROCEEDINGS,
-        "manual":MANUAL,
-        "masterthesis":MASTERTHESIS,
-        "misc":MISC,
-        "phdthesis":PHDTHESIS,
-        "proceedings":PROCEEDINGS,
-        "techreport":TECHREPORT,
-        "unpublished":UNPUBLISHED
+        "article":DOC_ARTICLE,
+        "book":DOC_BOOK,
+        "booklet":DOC_BOOKLET,
+        "conference":DOC_CONFERENCE,
+        "inbook":DOC_INBOOK,
+        "incollection":DOC_INCOLLECTION,
+        "inproceedings":DOC_INPROCEEDINGS,
+        "manual":DOC_MANUAL,
+        "masterthesis":DOC_MASTERTHESIS,
+        "misc":DOC_MISC,
+        "phdthesis":DOC_PHDTHESIS,
+        "proceedings":DOC_PROCEEDINGS,
+        "techreport":DOC_TECHREPORT,
+        "unpublished":DOC_UNPUBLISHED
     }
     
     def __init__(self):
-        self.type_ = self.UNKNOWN
+        self.type_ = self.DOC_UNKNOWN
         self.fields_ = dict()
         
     def hasField(self, field):
@@ -85,9 +85,9 @@ class DocumentFields:
         return self.type_
     
     def setDocType(self, docType):
-        if (docType != self.UNKNOWN and not docType in self.TYPES):
+        if (docType != self.DOC_UNKNOWN and not docType in self.TYPES):
             print("Warning : incorrect type for document")
-            self.type_ = self.UNKNOWN
+            self.type_ = self.DOC_UNKNOWN
         else:    
             self.type_ = docType
         

@@ -7,6 +7,9 @@ from bibtex.bibtexReader import BibtexReader
 # TODO : handle errors when reading bibtex file
 
 class Document:
+
+    DOCUMENT_MINIMAL_FIELDS = "type", "author", "year"
+
     def __init__(self):
         self.fields_ = None
         self.folderPath_ = None
@@ -30,4 +33,10 @@ class Document:
         folder.setDocFields(self.fields_)
         folder.create(folderPath)
         folder.organize([bibfilePath])
+
+    def getMinimalFields(self):
+        fields = self.fields_
+        if(fields == None):
+            print("Error : trying to get minimal fields without a field object")
+            return None
 

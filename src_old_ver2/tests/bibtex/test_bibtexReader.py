@@ -42,7 +42,7 @@ class TestBibtexReader(Test):
         parser = BibtexReader("article.bib")
         fields = parser.read()
         assert (fields != None)
-        assert (fields.getDocType() == DocumentFields.ARTICLE)
+        assert (fields.getDocType() == DocumentFields.DOC_ARTICLE)
         assert (fields.getField("title") == "Understanding and Improving the Realism of Image Composites")
         assert (fields.getField("journal") == "ACM Trans. Graph.")
         

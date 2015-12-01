@@ -20,7 +20,7 @@ class BibtexReader:
             with open(self.path.getAbsolutePath()) as bibtex_file:
                 bibtex_str = bibtex_file.read()
         except Exception as e:
-            print("Unable to load the bibtex file ", self.path, " : ", e)
+            print("Unable to load the bibtex file ", self.path.getAbsolutePath(), " : ", e)
             return None
                 
         bib_database = bibtexparser.loads(bibtex_str)

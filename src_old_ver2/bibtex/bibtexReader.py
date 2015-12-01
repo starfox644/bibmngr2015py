@@ -10,9 +10,9 @@ from document.documentFields import DocumentFields
 def entryTypeToDocType(entryType):
     docType = DocumentFields.OTHER
     if(entryType == "article"):
-        docType = DocumentFields.ARTICLE
+        docType = DocumentFields.DOC_ARTICLE
     elif(entryType == "book"):
-        docType = DocumentFields.BOOK
+        docType = DocumentFields.DOC_BOOK
     return docType
         
 class BibtexReader:

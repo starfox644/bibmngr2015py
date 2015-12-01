@@ -51,7 +51,7 @@ class File:
             f.write(content)
             f.close()
         except Exception as e:
-            print("Error : unable to write content in file : ", self.path_)
+            print("Error : unable to write content in file : ", self.path_, " : ", e)
 
     def readContent(self):
         content = None

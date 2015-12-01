@@ -58,22 +58,6 @@ Permet de connaître l'état des documents répertoriés, par exemple si ils ont
     \item Notes diverses
 \end{itemize}
 
-\section{Champs importants des documents}
-
-\subsection{Tous les documents}
-
-\begin{itemize}
- \item Titre
- \item Année
- \item Auteurs
-\end{itemize}
-
-\subsection{Article}
-
-\begin{itemize}
- \item 
-\end{itemize}
-
 
 \end{document}
 
