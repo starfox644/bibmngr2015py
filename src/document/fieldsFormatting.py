@@ -28,3 +28,4 @@ def formatJournal(journal):
         if (abrv in newJournal):
             newJournal = newJournal.replace(abrv, JOURNAL_ABBREV[abrv])
     return newJournal
+    

@@ -1,17 +1,19 @@
 # -*- coding: utf-8 -*-
 
-import sys
-sys.path.append("../..")
-
-import os
-import shutil
-
 from fs.directory import Directory
 from fs.file import File
 from fs.path import Path
-
-import unittest
+import os
+import shutil
+import sys
 from unittest import TestCase
+import unittest
+
+
+sys.path.append("../..")
+
+
+
 
 class TestDirectory(TestCase):
 

@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 
-import sys
-sys.path.append("../..")
-
-import unittest
-from unittest import TestCase
-
 from document.documentFields import DocumentFields
 from document.documentFields import strToDocType
+import sys
+from unittest import TestCase
+import unittest
+
+
+sys.path.append("../..")
+
+
 
 class TestDocumentFields(TestCase):
         

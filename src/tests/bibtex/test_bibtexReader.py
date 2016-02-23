@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
+from bibtex.bibtexReader import BibtexReader
+from document.documentFields import DocumentFields
 import sys
-sys.path.append("../..")
-
 from tests.test import Test
 
-from document.documentFields import DocumentFields
-from bibtex.bibtexReader import BibtexReader
+
+sys.path.append("../..")
+
+
 
 
 class TestBibtexReader(Test):

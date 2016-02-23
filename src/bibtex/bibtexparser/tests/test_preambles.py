@@ -1,7 +1,8 @@
+from collections import OrderedDict
 import unittest
+
 import bibtexparser
 from bibtexparser.bibdatabase import BibDatabase
-from collections import OrderedDict
 
 
 class TestPreambleParse(unittest.TestCase):

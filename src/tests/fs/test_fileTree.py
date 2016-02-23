@@ -1,13 +1,14 @@
 # -*- coding: utf-8 -*-
 
-import sys
+from fs.fileTree import FileTree
 import os
+import shutil
+import sys
+
 
 sys.path.append("../..")
 
-import shutil
 
-from fs.fileTree import FileTree
 
 def printFile(path):
     print(path)

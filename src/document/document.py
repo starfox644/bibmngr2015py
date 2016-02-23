@@ -1,11 +1,14 @@
 # -*- coding: utf-8 -*-
 
-from .documentFields import DocumentFields
-from .documentFolder import DocumentFolder
+from pathlib import Path
+
 from bibtex.bibtexReader import BibtexReader
 
-# TODO : handle errors when reading bibtex file
+from .documentFields import DocumentFields
+from .documentFolder import DocumentFolder
 
+
+# TODO : handle errors when reading bibtex file
 class Document:
 
     DOCUMENT_MINIMAL_FIELDS = "type", "author", "year"
@@ -23,7 +26,11 @@ class Document:
             success = True
         return success
 
-    def createDocumentFolder(self, bibfilePath, folderPath="."):
+    def createDocumentFolder(self, bibfilePath, folderPath=None):
+        if(folderPath is None):
+            bibPath = Path(bibfilePath)
+            folderPath = str(bibPath.parent)
+            
         self.folderPath_ = folderPath
         if (self.fields_ == None):
             print("Error : attempt to create a document folder without fields at : ", folderPath)

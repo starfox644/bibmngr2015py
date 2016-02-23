@@ -1,13 +1,15 @@
 # -*- coding: utf-8 -*-
 
+from fs.file import File
+import os
 import sys
+from unittest import TestCase
+import unittest
+
+
 sys.path.append("../..")
 
-import os
-import unittest
-from unittest import TestCase
 
-from fs.file import File
 
 class TestFile(TestCase):
 

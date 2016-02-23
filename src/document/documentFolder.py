@@ -1,13 +1,13 @@
 # -*- coding: utf-8 -*-
 
+from fs.directory import Directory
+from fs.file import File
+from fs.path import Path
+
 from .documentFields import DocumentFields
 from .latexNotes import LatexNotes
-from .wikiNotes import WikiNotes
 from .notes import Notes
-from fs.path import Path
-from fs.file import File
-from fs.directory import Directory
-
+from .wikiNotes import WikiNotes
 
 class DocumentFolder:
     
@@ -20,7 +20,7 @@ class DocumentFolder:
     
     BIBLIODATA_FILE_NAME = "biblio_data"
     
-    wordsRemoved = ["a", "an", "and", "of", "on", "the"]
+    wordsRemoved = ["a", "an", "at", "and", "in", "of", "on", "the"]
     
     def __init__(self, path=""):
         if (path.__class__ == Path):
@@ -43,7 +43,6 @@ class DocumentFolder:
 
     # The name is computed from the title of the document, obtained in the fields.
     def computeFolderName(self):
-        # def isAlphaNum(l) : return (l.isalnum() or l.isspace())
         name = ""
         if (self.fields_ != None and self.fields_.hasTitle()):
             title = self.fields_.getField("title")
@@ -95,10 +94,6 @@ class DocumentFolder:
         latexNotes = LatexNotes(self.fields_)
         latexNotes.createAllContent()
         latexNotes.writeContent(notesPath)
-
-        wikiNotes = WikiNotes(self.fields_)
-        wikiNotes.createAllContent()
-        wikiNotes.writeContent(notesPath)
 
         if(filesToMoveIn is not None):
             for file in filesToMoveIn:

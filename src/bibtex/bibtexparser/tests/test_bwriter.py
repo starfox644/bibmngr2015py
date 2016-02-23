@@ -5,8 +5,8 @@
 
 
 
-import unittest
 import sys
+import unittest
 
 from bibtexparser.bparser import BibTexParser
 from bibtexparser.bwriter import BibTexWriter, to_bibtex

@@ -2,10 +2,11 @@
 
 import os
 
-from .path import Path
 from .file import File
-# from directory import *
+from .path import Path
 
+
+# from directory import *
 class FileTree:
     
     def __init__(self, path=""):

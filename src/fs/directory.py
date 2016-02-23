@@ -3,12 +3,12 @@
 import os
 import shutil
 
-from .path import Path
 from .file import File
 from .fileTree import FileTree
+from .path import Path
+
 
 # TODO : exceptions instead of print in case of error
-
 class Directory(File):
     
     def __init__(self, path=""):

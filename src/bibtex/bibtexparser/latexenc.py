@@ -10,6 +10,7 @@
 import re
 import sys
 
+
 __all__ = ['string_to_latex', 'protect_uppercase', 'unicode_to_latex',
            'unicode_to_crappy_latex1', 'unicode_to_crappy_latex2']
 

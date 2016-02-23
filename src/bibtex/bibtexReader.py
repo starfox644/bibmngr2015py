@@ -1,12 +1,14 @@
+from document.documentFields import DocumentFields
+from document.documentFields import strToDocType
+from fs.path import Path
 import sys
-from . import bibtexparser
-# -*- coding: utf-8 -*-
 
+from . import bibtexparser
+
+
+# -*- coding: utf-8 -*-
 sys.path.append("../..")
 
-from fs.path import Path
-from document.documentFields import strToDocType
-from document.documentFields import DocumentFields
         
 class BibtexReader:
     

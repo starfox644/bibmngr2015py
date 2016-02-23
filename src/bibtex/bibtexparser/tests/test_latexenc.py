@@ -20,6 +20,7 @@ import unittest
 
 from bibtexparser.latexenc import *
 
+
 class TestLatexConverter(unittest.TestCase):
 
     def test_accent(self):

@@ -7,11 +7,13 @@
 # Etienne Posthumus (epoz)
 # Francois Boulogne <fboulogne at april dot org>
 
-import sys
-import logging
 import io
+import logging
 import re
+import sys
+
 from .bibdatabase import BibDatabase
+
 
 logger = logging.getLogger(__name__)
 

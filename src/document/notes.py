@@ -1,14 +1,16 @@
 # -*- coding: utf-8 -*-
 
 from fs.file import File
+
 from .fieldsFormatting import *
+
 
 class Notes:
 
     TABLE_HEADER = "----- Description -----\n\n"
     TABLE_END = "-----------------------\n\n"
 
-    FIELDS_IN_TABLE = ["year", "author", "keyword", "journal", "booktitle"]
+    FIELDS_IN_TABLE = ["year", "author", "journal", "booktitle"]
     TRANSLATION = {'year':'Annee', 'author':"Auteurs", "keyword":"Mots-cles", "booktitle":"revue"}
 
     def __init__(self, fields):

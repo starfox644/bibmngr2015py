@@ -2,12 +2,12 @@
 # -*- coding: utf-8 -*-
 
 
-import unittest
 import codecs
+import unittest
 
+from bibtexparser import customization
 from bibtexparser.bparser import BibTexParser
 from bibtexparser.customization import *
-from bibtexparser import customization
 
 
 def customizations_unicode(record):

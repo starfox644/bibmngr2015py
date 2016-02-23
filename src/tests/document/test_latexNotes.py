@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 
-import sys
-sys.path.append("../..")
-
-import difflib
 from difflib import *
-
-from tests.test import Test
-
+import difflib
 from document.documentFields import DocumentFields
 from document.latexNotes import LatexNotes
+import sys
+from tests.test import Test
+
+
+sys.path.append("../..")
+
+
+
 
 class TestLatexNotes(Test):
     def __init__(self):

@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from document.document import Document
 import sys
+from tests.test import Test
+
+
 sys.path.append("../..")
 
-from document.document import Document
-from tests.test import Test
 
 class TestDocument(Test):
     def __init__(self):

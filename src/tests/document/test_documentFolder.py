@@ -1,15 +1,17 @@
 # -*- coding: utf-8 -*-
 
-import sys
-sys.path.append("../..")
-
-import unittest
-from unittest import TestCase
-
-from fs.directory import Directory
-from fs.file import File
 from document.documentFields import DocumentFields
 from document.documentFolder import DocumentFolder
+from fs.directory import Directory
+from fs.file import File
+import sys
+from unittest import TestCase
+import unittest
+
+
+sys.path.append("../..")
+
+
 
 class TestDocumentFolder(TestCase):
 

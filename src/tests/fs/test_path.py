@@ -1,12 +1,14 @@
 # -*- coding: utf-8 -*-
 
+from fs.path import Path
 import sys
+from unittest import TestCase
+import unittest
+
+
 sys.path.append("../..")
 
-import unittest
-from unittest import TestCase
 
-from fs.path import Path
     
 class TestPath(TestCase):
     

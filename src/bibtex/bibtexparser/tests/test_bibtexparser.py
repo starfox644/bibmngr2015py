@@ -1,7 +1,8 @@
+from tempfile import TemporaryFile
 import unittest
+
 import bibtexparser
 from bibtexparser.bparser import BibTexParser
-from tempfile import TemporaryFile
 
 
 class TestBibtexParserParserMethods(unittest.TestCase):

@@ -1,10 +1,12 @@
 # -*- coding: utf-8 -*-
 
+from document.fieldsFormatting import *
 import sys
+from tests.test import Test
+
+
 sys.path.append("../..")
 
-from tests.test import Test
-from document.fieldsFormatting import *
 
 class TestFieldsFomatting(Test):
     def __init__(self):

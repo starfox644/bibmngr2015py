@@ -1,7 +1,8 @@
 import unittest
+
 import bibtexparser
-from bibtexparser.bwriter import BibTexWriter
 from bibtexparser.bibdatabase import BibDatabase
+from bibtexparser.bwriter import BibTexWriter
 
 
 class TestBibTexWriter(unittest.TestCase):

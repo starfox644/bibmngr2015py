@@ -1,6 +1,7 @@
-from fs.path import Path
 from fs.file import File
+from fs.path import Path
 from lxml import etree
+
 
 def createDocumentEntry(self, fields):
     None

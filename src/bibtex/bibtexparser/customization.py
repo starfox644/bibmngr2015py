@@ -8,10 +8,11 @@ Each of them takes a record and return the modified record.
 """
 
 import itertools
-import re
 import logging
+import re
 
 from .latexenc import unicode_to_latex, unicode_to_crappy_latex1, unicode_to_crappy_latex2, string_to_latex, protect_uppercase
+
 
 logger = logging.getLogger(__name__)
 
