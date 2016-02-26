@@ -1,12 +1,11 @@
 # -*- coding: utf-8 -*-
 
-from pathlib import Path
+from pathlib import Path, PurePath
 
 from bibtex.bibtexReader import BibtexReader
 
-from .documentFields import DocumentFields
 from .documentFolder import DocumentFolder
-
+from .latexNotes import LatexNotes
 
 # TODO : handle errors when reading bibtex file
 class Document:
@@ -16,9 +15,11 @@ class Document:
     def __init__(self):
         self.fields_ = None
         self.folderPath_ = None
+        self.bibtexPath = None
 
     def readFields(self, bibtexPath):
         success = False
+        self.bibtexPath = bibtexPath
         parser = BibtexReader(bibtexPath)
         fields = parser.read()
         if (fields != None):
@@ -40,10 +41,32 @@ class Document:
         folder.setDocFields(self.fields_)
         folder.create(folderPath)
         folder.organize([bibfilePath])
+        
+    def writeLatexNotes(self, path = None):
+        if(self.fields_ is not None):
+            
+            latexNotes = LatexNotes(self.fields_)
+            latexNotes.createAllContent()
+            
+            if(path is None):
+                bibPath = Path(self.bibtexPath)
+                path = str(bibPath.parent)
+            
+            path = Path(path)
+            path = path.resolve()
+            latexNotes.writeContent(str(path))
+            
 
     def getMinimalFields(self):
         fields = self.fields_
         if(fields == None):
             print("Error : trying to get minimal fields without a field object")
-            return None
+        return None
+    
+    
+    
+    
+    
+    
+    
 

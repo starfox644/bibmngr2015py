@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from fs.file import File
-
-from .fieldsFormatting import *
+from .fieldsFormatting import formatAuthors, formatJournal
 
 
 class Notes:

@@ -1,8 +1,6 @@
 # -*- coding: utf-8 -*-
 
 from fs.file import File
-
-from .documentFields import DocumentFields
 from .notes import Notes
 
 
@@ -11,20 +9,19 @@ class LatexNotes(Notes):
     HEADER = (  "\\documentclass[10pt]{article}\n"
                 "\\usepackage[utf8]{inputenc}\n"
                 "\\usepackage{graphicx}\n"
-                "\\usepackage{longtable}\n"
                 "\\usepackage{booktabs}\n"
-                "\\usepackage[top=1cm, bottom=1cm, left=1cm, right=1cm]{geometry}\n"
+                "\\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}\n"
                 "\n"
                 "\\begin{document}\n\n")
 
     END = "\end{document}\n"
 
-    TABLE_HEADER = ("\\begin{longtable}[c]{@{}ll@{}}\n"
-                    "\\toprule\\addlinespace\n"
+    TABLE_HEADER = ("\\begin{tabular}{| l l |}\n"
+                    "\\hline \n"
                     "\n")
 
-    TABLE_END = ( "\\bottomrule\n"
-            "\\end{longtable}\n\n")
+    TABLE_END = ( "\\hline\n"
+            "\\end{tabular}\n\n")
 
     FILENAME = "notes.tex"
 
@@ -52,7 +49,8 @@ class LatexNotes(Notes):
         return self.TABLE_END
 
     def getFieldTableEntry(self, name, value):
-        entry = name + " : & \\textbf{" + value + "}\n"
-        entry += "\\\\\\addlinespace\n\n"
+        entry = "& \\\\ \n"
+        entry += name + " : & \\textbf{" + value + "} \\\\" + "\n"
+        entry += "& \\\\ \n"
         return entry
 
