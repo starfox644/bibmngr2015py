@@ -1,16 +1,19 @@
 # -*- coding: utf-8 -*-
 
-from fs.file import File
-from .fieldsFormatting import formatAuthors, formatJournal
-
+from fs.file import File, MyPath
+from .fieldsFormatting import formatAuthors, formatJournal, formatLink
 
 class Notes:
 
     TABLE_HEADER = "----- Description -----\n\n"
     TABLE_END = "-----------------------\n\n"
 
-    FIELDS_IN_TABLE = ["year", "author", "journal", "booktitle"]
-    TRANSLATION = {'year':'Annee', 'author':"Auteurs", "keyword":"Mots-cles", "booktitle":"revue"}
+    FIELDS_IN_TABLE = ["year", "author", "journal", "booktitle", "link"]
+    TRANSLATION = {'year' : 'Année', 
+                   'author' : "Auteurs", 
+                   "keyword" : "Mots-clés", 
+                   "booktitle" : "revue",
+                   "link" : "lien"}
 
     def __init__(self, fields):
         self.fields_ = fields
@@ -30,7 +33,9 @@ class Notes:
         return "notes.txt"
 
     def writeContent(self, folderPath):
-        f = File(folderPath + "/" + self.getFileName())
+        notesPath = MyPath(folderPath + "/" + self.getFileName())
+        notesPath = notesPath.findNotUsedPath()
+        f = File(notesPath)
         f.writeContent(self.getDocumentContent())
 
     def getFormattedTitle(self, title):
@@ -56,6 +61,8 @@ class Notes:
             newFieldValue = formatAuthors(fieldValue)
         elif(fieldName == "journal"):
             newFieldValue = formatJournal(fieldValue)
+        elif(fieldName == "link"):
+            newFieldValue = formatLink(fieldValue)
         return newFieldValue
 
     def addFieldInTable(self, tableContent, fieldName):

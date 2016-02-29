@@ -3,8 +3,7 @@
 import os
 
 from .file import File
-from .path import Path
-
+from .myPath import MyPath
 
 # from directory import *
 class FileTree:

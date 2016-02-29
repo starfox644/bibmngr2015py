@@ -10,6 +10,7 @@ class LatexNotes(Notes):
                 "\\usepackage[utf8]{inputenc}\n"
                 "\\usepackage{graphicx}\n"
                 "\\usepackage{booktabs}\n"
+                "\\usepackage{hyperref}\n"
                 "\\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm]{geometry}\n"
                 "\n"
                 "\\begin{document}\n\n")

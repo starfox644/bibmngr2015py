@@ -1,29 +1,19 @@
 from document.documentFields import DocumentFields
 from document.documentFields import strToDocType
-from fs.path import Path
-import sys
+from fs.myPath import MyPath
 
 from . import bibtexparser
 
-
-# -*- coding: utf-8 -*-
-sys.path.append("../..")
-
-        
 class BibtexReader:
     
     def __init__(self, bibtexPath):
-        self.path = Path(bibtexPath)
+        self.path = MyPath(bibtexPath)
     
     # reads the file and returns a DocumentFields object
     def read(self):  
         fields = DocumentFields()
-        try:
-            with open(self.path.getAbsolutePath()) as bibtex_file:
-                bibtex_str = bibtex_file.read()
-        except Exception as e:
-            print("Unable to load the bibtex file ", self.path.getAbsolutePath(), " : ", e)
-            return None
+        with open(self.path.path) as bibtex_file:
+            bibtex_str = bibtex_file.read()
                 
         bib_database = bibtexparser.loads(bibtex_str)
 

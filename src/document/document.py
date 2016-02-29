@@ -1,6 +1,6 @@
-# -*- coding: utf-8 -*-
 
 from pathlib import Path, PurePath
+from fs.myPath import MyPath
 
 from bibtex.bibtexReader import BibtexReader
 
@@ -21,26 +21,34 @@ class Document:
         success = False
         self.bibtexPath = bibtexPath
         parser = BibtexReader(bibtexPath)
-        fields = parser.read()
+        
+        try:
+            fields = parser.read()
+        except (OSError, IOError) as e:
+            print("Unable to read the bibtex file " + str(bibtexPath) + " : ", e.strerror)
+            return False
+        
         if (fields != None):
             self.fields_ = fields
             success = True
+            
         return success
 
     def createDocumentFolder(self, bibfilePath, folderPath=None):
         if(folderPath is None):
-            bibPath = Path(bibfilePath)
+            bibPath = MyPath(bibfilePath)
             folderPath = str(bibPath.parent)
             
         self.folderPath_ = folderPath
+        
         if (self.fields_ == None):
-            print("Error : attempt to create a document folder without fields at : ", folderPath)
-            return
+            raise RuntimeError("Error : attempt to create a document folder without fields at : ", self.folderPath_)
 
         folder = DocumentFolder()
         folder.setDocFields(self.fields_)
         folder.create(folderPath)
-        folder.organize([bibfilePath])
+        #folder.organize([bibfilePath])
+        folder.organize()
         
     def writeLatexNotes(self, path = None):
         if(self.fields_ is not None):
@@ -49,18 +57,20 @@ class Document:
             latexNotes.createAllContent()
             
             if(path is None):
-                bibPath = Path(self.bibtexPath)
+                bibPath = MyPath(self.bibtexPath)
                 path = str(bibPath.parent)
             
-            path = Path(path)
-            path = path.resolve()
+            path = MyPath(path)
+            path = path.absoluteBasename
             latexNotes.writeContent(str(path))
             
 
     def getMinimalFields(self):
         fields = self.fields_
+        
         if(fields == None):
-            print("Error : trying to get minimal fields without a field object")
+            raise RuntimeError("Error : attempt to create a document folder without fields at : ", self.folderPath_)
+        
         return None
     
     

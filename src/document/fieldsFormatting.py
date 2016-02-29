@@ -1,3 +1,4 @@
+
 JOURNAL_ABBREV = {"trans.":"Transactions",
                   "Trans.":"Transactions",
                   "graph.":"Graphics",
@@ -29,3 +30,5 @@ def formatJournal(journal):
             newJournal = newJournal.replace(abrv, JOURNAL_ABBREV[abrv])
     return newJournal
     
+def formatLink(link):
+    return "\\href{" + link + "}{" + link + " }"
